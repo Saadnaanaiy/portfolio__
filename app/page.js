@@ -79,15 +79,11 @@ export default function Home() {
     setIsMounted(true);
 
     if (typeof window !== 'undefined') {
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        setIsDarkMode(true);
-      } else {
-        setIsDarkMode(false);
-      }
+      // Always start in light mode, regardless of previous preference
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+
+      // Don't read from localStorage - always default to light
 
       const timer = setTimeout(() => {
         setIsLoading(false);
@@ -105,7 +101,7 @@ export default function Home() {
       localStorage.theme = 'dark';
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.theme = '';
+      localStorage.theme = 'light'; // Store light preference explicitly
     }
   }, [isDarkMode, isMounted]);
 
