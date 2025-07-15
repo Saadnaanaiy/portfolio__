@@ -76,7 +76,7 @@ import window from './windows.png';
 import C from './C.png';
 import composer from './Composer.png';
 import npm from './NPM.png';
-import postman from './postman.png';
+import postman from './Postman.png';
 import RabbitMQ from './RabbitMQ.png';
 import AWS from './AWS.png';
 import gcp from './gcp.png';
