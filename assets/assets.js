@@ -74,14 +74,14 @@ import python_ from './python.png';
 import linux from './linux.png';
 import window from './windows.png';
 import C from './C.png';
-import composer from './composer.png';
-import npm from './npm.png';
+import composer from './Composer.png';
+import npm from './NPM.png';
 import postman from './postman.png';
 import RabbitMQ from './RabbitMQ.png';
 import AWS from './AWS.png';
 import gcp from './gcp.png';
-import ansible from './ansible.png';
-import jenkins from './jenkins.png';
+import ansible from './Ansible.png';
+import jenkins from './Jenkins.png';
 import terraform from './terraform.png';
 
 
