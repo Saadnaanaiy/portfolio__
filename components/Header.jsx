@@ -343,7 +343,11 @@ const Header = ({ isDarkMode }) => {
                 Contact Me
               </Link>
               <a
-                href="/resume.pdf"
+                href="/saadNaanaiyCV.pdf"
+                download="SaadNaanaiy.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download CV as PDF"
                 className={`px-8 py-3 border-[0.5px] border-gray-400 dark:border-white ${
                   isDarkMode
                     ? 'text-white hover:bg-darkHover/50 hover:shadow-white'
