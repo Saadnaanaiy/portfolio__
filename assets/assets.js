@@ -74,7 +74,7 @@ import python_ from './python.png';
 import linux from './linux.png';
 import window from './windows.png';
 import C from './C.png';
-import Composer from './composer.png';
+import composer from './composer.png';
 import npm from './npm.png';
 import postman from './postman.png';
 import RabbitMQ from './RabbitMQ.png';
@@ -83,6 +83,7 @@ import gcp from './gcp.png';
 import ansible from './ansible.png';
 import jenkins from './jenkins.png';
 import terraform from './terraform.png';
+
 
 
 export const myDataImage = [
@@ -222,7 +223,7 @@ export const assets = {
   linux,
   window,
   C,
-  Composer,
+  composer,
   npm,
   postman,
   RabbitMQ,
@@ -551,7 +552,7 @@ export const toolsData = [
   },
 
   {
-    src: Composer,
+    src: composer,
     title: 'Composer',
     category: 'Packages',
   },
