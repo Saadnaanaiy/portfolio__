@@ -1,23 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import { workData } from '@/assets/assets';
+import { workData } from '../assets/assets';
+import About from '../components/About';
+import Header from '../components/Header';
+import Navbar from '../components/Navbar';
+import Services from '../components/Services';
+import WorkSection from '../components/WorkSection';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import Certifs from '../components/Certifs';
 
-// Dynamic imports to avoid hydration issues
-const About = dynamic(() => import('@/components/About'), { ssr: false });
-const Header = dynamic(() => import('@/components/Header'), { ssr: false });
-const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
-const Services = dynamic(() => import('@/components/Services'), { ssr: false });
-const WorkSection = dynamic(() => import('@/components/WorkSection'), {
-  ssr: false,
-});
-const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
-const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
-const Certifs = dynamic(() => import('@/components/Certifs'), { ssr: false });
-
-// Loading component to avoid server/client hydration mismatch
 const Loading = ({ isDarkMode }) => (
   <div
     className={`fixed inset-0 flex items-center justify-center ${
@@ -67,25 +60,11 @@ const Loading = ({ isDarkMode }) => (
   </div>
 );
 
-// Client-side only component to fix hydration issues
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) return null;
-
-  return children;
-};
-
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Sample projects for showcase
   const projects = workData.map((project, index) => ({
     id: index,
     title: project.title,
@@ -96,13 +75,10 @@ export default function Home() {
     githubUrl: project.github,
   }));
 
-  // Mark component as mounted to prevent hydration mismatch
   useEffect(() => {
     setIsMounted(true);
 
-    // Client-side only code
     if (typeof window !== 'undefined') {
-      // Set initial theme from local storage
       if (
         localStorage.theme === 'dark' ||
         (!('theme' in localStorage) &&
@@ -113,14 +89,11 @@ export default function Home() {
         setIsDarkMode(false);
       }
 
-      // Loading animation
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 2000);
 
-      return () => {
-        clearTimeout(timer);
-      };
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -136,30 +109,20 @@ export default function Home() {
     }
   }, [isDarkMode, isMounted]);
 
-  // Prevent hydration errors by only rendering the complete UI when mounted
-  if (!isMounted) {
-    return null;
-  }
-
-  // Loading screen
-  if (isLoading) {
+  if (!isMounted || isLoading) {
     return <Loading isDarkMode={isDarkMode} />;
   }
 
   return (
-    <ClientOnly>
-      <div>
-        <Suspense fallback={<Loading isDarkMode={isDarkMode} />}>
-          <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-          <Header className="mt-25" isDarkMode={isDarkMode} />
-          <About isDarkMode={isDarkMode} />
-          <Services isDarkMode={isDarkMode} />
-          <WorkSection projects={projects} isDarkMode={isDarkMode} />
-          <Certifs isDarkMode={isDarkMode} />
-          <Contact isDarkMode={isDarkMode} />
-          <Footer isDarkMode={isDarkMode} />
-        </Suspense>
-      </div>
-    </ClientOnly>
+    <div>
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Header className="mt-25" isDarkMode={isDarkMode} />
+      <About isDarkMode={isDarkMode} />
+      <Services isDarkMode={isDarkMode} />
+      <WorkSection projects={projects} isDarkMode={isDarkMode} />
+      <Certifs isDarkMode={isDarkMode} />
+      <Contact isDarkMode={isDarkMode} />
+      <Footer isDarkMode={isDarkMode} />
+    </div>
   );
 }

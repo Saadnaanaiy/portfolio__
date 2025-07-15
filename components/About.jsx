@@ -1,8 +1,30 @@
-import { assets, toolsData, infoList } from '@/assets/assets';
+'use client';
+import { useState } from 'react';
+import { assets, toolsData, infoList } from '../assets/assets';
 import Image from 'next/image';
 import GradientText from './GradientText';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const About = ({ isDarkMode }) => {
+  const [activeCategory, setActiveCategory] = useState('Languages');
+
+  const categories = [
+    'Languages',
+    'Frameworks',
+    'Tools',
+    'Databases',
+    'Packages',
+    'Cloud Services',
+    'Automation Tools',
+    'Operating Systems',
+    'Soft Skills',
+  ];
+
+ const filteredTools = toolsData.filter(
+   (tool) => tool.category === activeCategory,
+ );
+
+
   return (
     <div id="about" className="w-full px-[12%] py-10 scroll-mt-20">
       <h4 className="dark:text-white text-center mb-4 text-2xl font-Outfit font-semibold text-gray-700">
@@ -13,8 +35,8 @@ const About = ({ isDarkMode }) => {
         <GradientText
           colors={
             isDarkMode
-              ? ['#ff5c8d', '#7a4bff', '#ff5c8d', '#7a4bff', '#ff5c8d'] // Vibrant colors for dark mode
-              : ['#000000', '#808080', '#000000', '#808080', '#000000'] // Black and gray for light mode
+              ? ['#ff5c8d', '#7a4bff', '#ff5c8d', '#7a4bff', '#ff5c8d']
+              : ['#000000', '#808080', '#000000', '#808080', '#000000']
           }
           animationSpeed={3}
           showBorder={false}
@@ -47,37 +69,33 @@ const About = ({ isDarkMode }) => {
                   <span className="absolute left-1/2 transform -translate-x-1/2 -top-20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex justify-center items-center gap-2 bg-gray-800 dark:text-white dark:bg-darkHover text-white pl-8 px-8 py-2 rounded-lg shadow-md w-38">
                     <Image
                       src={tool.src}
-                      alt={tool.title || `Tool ${index}`}
+                      alt={tool.title}
                       width={30}
                       height={30}
                       className="w-6 h-6"
                     />
-                    {tool.title || `Tool ${index}`}
+                    {tool.title}
                   </span>
-                  <span className="relative">
-                    {tool.title || `Tool ${index}`},{' '}
-                  </span>
+                  <span className="relative">{tool.title}, </span>
                 </span>
               ))}
-              , and many other technologies like{' '}
+              and many other technologies like{' '}
               {toolsData.slice(3, 10).map((tool, index) => (
                 <span
                   key={index}
                   className="relative group cursor-pointer text-gray-700 dark:text-white"
                 >
-                  <span className="absolute left-1/2 transform -translate-x-1/2 -top-20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex justify-center items-center gap-2 bg-gray-800 dark:text-white dark:bg-darkHover  text-white pl-8 px-8 py-2 rounded-lg shadow-md w-38">
+                  <span className="absolute left-1/2 transform -translate-x-1/2 -top-20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex justify-center items-center gap-2 bg-gray-800 dark:text-white dark:bg-darkHover text-white pl-8 px-8 py-2 rounded-lg shadow-md w-38">
                     <Image
                       src={tool.src}
-                      alt={tool.title || `Tool ${index}`}
+                      alt={tool.title}
                       width={80}
                       height={80}
                       className="w-6 h-6"
                     />
-                    {tool.title || `Tool ${index}`}
+                    {tool.title}
                   </span>
-                  <span className="relative">
-                    {tool.title || `Tool ${index}`}, {'  '}
-                  </span>
+                  <span className="relative">{tool.title}, </span>
                 </span>
               ))}
               .
@@ -93,8 +111,8 @@ const About = ({ isDarkMode }) => {
                     className="w-7 mt-3 mx-auto"
                     src={isDarkMode ? iconDark : icon}
                     alt={title}
-                    width={20} // Set width for icons
-                    height={20} // Set height for icons
+                    width={20}
+                    height={20}
                   />
                   <h3 className="dark:text-white my-4 text-center font-semibold text-gray-700">
                     {title}
@@ -110,22 +128,51 @@ const About = ({ isDarkMode }) => {
               Tools I Use
             </h4>
 
-            <ul className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
-              {toolsData.map((tool, index) => (
-                <li
-                  className="dark:hover:shadow-white dark:border flex items-center justify-center w-12 sm:w-14 aspect-square border-2 border-gray-200 rounded-lg cursor-pointer hover:-translate-y-1 duration-500 hover:shadow-black"
-                  key={index}
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-4 py-2 rounded-full border ${
+                    activeCategory === category
+                      ? 'bg-gray-800 text-white dark:bg-white dark:text-black'
+                      : 'bg-transparent text-gray-700 dark:text-white border-gray-500'
+                  } hover:scale-105 transition`}
                 >
-                  <Image
-                    src={tool.src}
-                    alt={tool.alt || `Tool ${index}`} // Use alt if available
-                    width={44} // Set a fixed width for tool icons
-                    height={40} // Set a fixed height for tool icons
-                    className="w-10 sm:w-10"
-                  />
-                </li>
+                  {category}
+                </button>
               ))}
-            </ul>
+            </div>
+
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 mt-4">
+              <AnimatePresence mode="wait">
+                {filteredTools.map((tool, index) => (
+                  <motion.div
+                    key={tool.title + index}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4, delay: index * 0.04 }} // ✅ Durée animation
+                    className="bg-white dark:bg-darkThem border-2 border-gray-200 dark:border-white rounded-lg p-2 flex flex-col items-center justify-center hover:scale-105 hover:-translate-y-1 hover:shadow-black dark:hover:shadow-white transition-all duration-500"
+                  >
+                    <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gray-100 dark:bg-darkHover rounded-full mb-2 transition duration-500">
+                      <Image
+                        src={tool.src}
+                        alt={tool.title}
+                        width={30}
+                        height={30}
+                        className="object-contain"
+                      />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium text-center text-gray-700 dark:text-white transition duration-500">
+                      {tool.title}
+                    </span>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

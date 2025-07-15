@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { assets, serviceData } from '@/assets/assets';
+import { myData, serviceData } from '../assets/assets';
 import Image from 'next/image';
 import { Dialog } from '@headlessui/react';
 import GradientText from './GradientText';

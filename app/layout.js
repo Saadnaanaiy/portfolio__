@@ -12,19 +12,16 @@ const ovo = Ovo({
 });
 
 export const metadata = {
-  title: 'Portfolio - Saad naanaiy',
+  title: 'Portfolio - Saad Naanaiy',
   description: 'Personal portfolio showcasing web development and design work',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
+    <html style={{ filter: 'saturate(1.3)' }}>
       <body
-        className={`${outfit.className} ${ovo.className} antialiased leading-8 overflow-x-hidden dark:bg-darkThem dark:text-white`}
-        suppressHydrationWarning
+        className={`${outfit.className} ${ovo.className} scroll-smooth antialiased leading-8 overflow-x-hidden dark:bg-darkThem dark:text-white`}
+        suppressHydrationWarning={true}
       >
         {children}
       </body>

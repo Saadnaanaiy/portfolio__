@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { workData } from '@/assets/assets';
+import { workData } from '../assets/assets';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaGithub,

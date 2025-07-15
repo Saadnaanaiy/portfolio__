@@ -63,6 +63,27 @@ import python from './images/python.png';
 import theLaravel from './images/laravel.png';
 import agile from './images/agile.png';
 import cube_icon from './icons/cube.png';
+import communication from "./communication.png";
+import critical_thinking from './critical-thinking.png';
+import innovation from './innovation.png';
+import timemanagment from './timemanagement.png';
+import learning from './learning_7870965.png';
+import java from './java_226777.png';
+import Cplus from './c_6132222.png';
+import python_ from './python.png';
+import linux from './linux.png';
+import window from './windows.png';
+import C from './C.png';
+import Composer from './composer.png';
+import npm from './npm.png';
+import postman from './postman.png';
+import RabbitMQ from './RabbitMQ.png';
+import AWS from './AWS.png';
+import gcp from './gcp.png';
+import ansible from './ansible.png';
+import jenkins from './jenkins.png';
+import terraform from './terraform.png';
+
 
 export const myDataImage = [
   aiImage,
@@ -190,6 +211,26 @@ export const assets = {
   github,
   twitter,
   gmail,
+  communication,
+  timemanagment,
+  innovation,
+  critical_thinking,
+  learning,
+  java,
+  Cplus,
+  python_,
+  linux,
+  window,
+  C,
+  Composer,
+  npm,
+  postman,
+  RabbitMQ,
+  AWS,
+  gcp,
+  ansible,
+  jenkins,
+  terraform,
 };
 
 export const workData = [
@@ -347,65 +388,189 @@ export const toolsData = [
   {
     src: assets.vscode,
     title: 'VSCode',
+    category: 'Tools',
   },
   {
     src: assets.firebase,
     title: 'Firebase',
+    category: 'Databases',
   },
   {
     src: assets.mongodb,
     title: 'MongoDB',
+    category: 'Databases',
   },
   {
     src: assets.figma,
     title: 'Figma',
+    category: 'Tools',
+  },
+  {
+    src: assets.communication,
+    title: 'Communication',
+    category: 'Soft Skills',
+  },
+  {
+    src: assets.critical_thinking,
+    title: 'Critical Thinking',
+    category: 'Soft Skills',
+  },
+  {
+    src: assets.innovation,
+    title: 'Innovation',
+    category: 'Soft Skills',
+  },
+  {
+    src: assets.timemanagment,
+    title: 'Times Management',
+    category: 'Soft Skills',
   },
   {
     src: assets.git,
     title: 'Git',
+    category: 'Tools',
   },
   {
     src: javascript,
     title: 'JavaScript',
+    category: 'Languages',
   },
   {
     src: reactjs,
     title: 'ReactJS',
+    category: 'Frameworks',
   },
   {
     src: laravel,
     title: 'Laravel',
+    category: 'Frameworks',
   },
-
   {
     src: graphql,
     title: 'GraphQL',
+    category: 'Tools',
   },
-
   {
     src: docker,
     title: 'Docker',
+    category: 'Tools',
   },
-
   {
     src: php,
     title: 'PHP',
+    category: 'Languages',
   },
   {
     src: mySql,
     title: 'MySQL',
+    category: 'Databases',
   },
-
   {
     src: kubernetes,
-    title: 'Kubernetes',
+    title: 'Tools',
+    category: 'Tools',
   },
   {
     src: nginx,
     title: 'NGINX',
+    category: 'Tools',
   },
   {
     src: nextjs,
     title: 'Next.js',
+    category: 'Frameworks',
+  },
+  {
+    src: learning,
+    title: 'Creativity',
+    category: 'Soft Skills',
+  },
+  {
+    src: Cplus,
+    title: 'C++',
+    category: 'Languages',
+  },
+
+  {
+    src: C,
+    title: 'C',
+    category: 'Languages',
+  },
+
+  {
+    src: java,
+    title: 'JAVA',
+    category: 'Languages',
+  },
+
+  {
+    src: python_,
+    title: 'Python',
+    category: 'Languages',
+  },
+
+  {
+    src: linux,
+    title: 'Linux',
+    category: 'Operating Systems',
+  },
+
+  {
+    src: window,
+    title: 'Windows',
+    category: 'Operating Systems',
+  },
+
+  {
+    src: gcp,
+    title: 'Google Cloud Platform',
+    category: 'Cloud Services',
+  },
+  {
+    src: AWS,
+    title: 'AWS',
+    category: 'Cloud Services',
+  },
+
+  {
+    src: RabbitMQ,
+    title: 'RabbitMQ',
+    category: 'Tools',
+  },
+
+  {
+    src: postman,
+    title: 'Postman',
+    category: 'Tools',
+  },
+
+  {
+    src: npm,
+    title: 'NPM',
+    category: 'Packages',
+  },
+
+  {
+    src: Composer,
+    title: 'Composer',
+    category: 'Packages',
+  },
+
+  {
+    src: ansible,
+    title: 'Ansible',
+    category: 'Automation Tools',
+  },
+
+  {
+    src: jenkins,
+    title: 'Jnekins',
+    category: 'Automation Tools',
+  },
+
+  {
+    src: terraform,
+    title: 'Terraform',
+    category: 'Automation Tools',
   },
 ];

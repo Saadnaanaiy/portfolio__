@@ -1,4 +1,4 @@
-import { assets } from '@/assets/assets';
+import { assets } from '../assets/assets';
 import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -237,8 +237,6 @@ const Header = ({ isDarkMode }) => {
               <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-purple-500 opacity-60"></div>
               <div className="absolute -bottom-1 -left-1 w-4 h-4 rounded-full bg-indigo-300 opacity-60"></div>
             </div>
-
-            
 
             <h1 className="text-5xl font-bold mt-6 mb-4 animate-in text-center">
               <GradientText

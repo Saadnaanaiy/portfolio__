@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { myData } from '@/assets/assets';
+import { myData } from '../assets/assets';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
