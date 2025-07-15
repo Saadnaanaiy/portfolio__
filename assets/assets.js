@@ -565,7 +565,7 @@ export const toolsData = [
 
   {
     src: jenkins,
-    title: 'Jnekins',
+    title: 'Jenkins',
     category: 'Automation Tools',
   },
 
