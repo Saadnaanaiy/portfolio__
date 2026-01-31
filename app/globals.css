@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  filter: saturate(1.1);
+}
+
 * {
-  font-family: Outfit;
+  font-family: var(--font-cyber), 'JetBrains Mono', ui-monospace, monospace;
 }
 
 @keyframes wave {
@@ -512,12 +516,47 @@ canvas {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef, #6366f1);
+  background: linear-gradient(90deg, #06b6d4, #10b981, #06b6d4, #0891b2);
   background-size: 300% 100%;
   animation: gradientBG 6s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Cyber section background */
+.bg-cyber-section {
+  background-color: #0a0e17;
+  background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Border glow on focus/hover */
+.cyber-border-glow {
+  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+.cyber-border-glow:hover {
+  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.4), 0 0 24px rgba(6, 182, 212, 0.2);
+}
+
+/* Binary rain – 0 & 1 falling from top to bottom */
+@keyframes cyber-binary-fall {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.55;
+  }
+  95% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
 }
 
 /* Glass effect styles */
@@ -535,23 +574,28 @@ canvas {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Custom scrollbar */
+/* Cybersecurity-themed scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #0a0e17;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6366f1;
-  border-radius: 3px;
+  background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #8b5cf6;
+  background: linear-gradient(180deg, #06b6d4 0%, #10b981 100%);
 }
 
 /* Hover effect for cards */

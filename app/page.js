@@ -10,11 +10,12 @@ import WorkSection from '../components/WorkSection';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Certifs from '../components/Certifs';
+import CyberBinaryBackground from '../components/CyberBinaryBackground';
 
 const Loading = ({ isDarkMode }) => (
   <div
-    className={`fixed inset-0 flex items-center justify-center ${
-      isDarkMode ? 'bg-gray-900' : 'bg-slate-50'
+    className={`fixed inset-0 flex items-center justify-center bg-cyber-grid bg-[length:40px_40px] ${
+      isDarkMode ? 'bg-cyber-dark' : 'bg-slate-50'
     }`}
   >
     <div className="relative flex flex-col items-center">
@@ -29,7 +30,7 @@ const Loading = ({ isDarkMode }) => (
             cy="50"
             r="45"
             fill="none"
-            stroke={isDarkMode ? '#6366f1' : '#4f46e5'}
+            stroke="#06b6d4"
             strokeWidth="8"
             strokeDasharray="283"
             strokeDashoffset="200"
@@ -37,24 +38,12 @@ const Loading = ({ isDarkMode }) => (
           />
         </svg>
       </div>
-      <div
-        className={`text-3xl font-bold tracking-wider ${
-          isDarkMode ? 'text-white' : 'text-indigo-600'
-        }`}
-      >
+      <div className="text-3xl font-bold tracking-wider text-cyber-cyan font-mono">
         <span className="inline-block animate-bounce-slow">S</span>
-        <span className="inline-block animate-bounce-slow animation-delay-200">
-          N
-        </span>
+        <span className="inline-block animate-bounce-slow animation-delay-200">N</span>
       </div>
-      <div
-        className={`mt-4 text-sm ${
-          isDarkMode ? 'text-gray-400' : 'text-gray-500'
-        }`}
-      >
-        <span className="inline-block animate-pulse">
-          Loading Experience...
-        </span>
+      <div className={`mt-4 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+        <span className="inline-block animate-pulse">Loading...</span>
       </div>
     </div>
   </div>
@@ -110,15 +99,18 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <Header className="mt-25" isDarkMode={isDarkMode} />
-      <About isDarkMode={isDarkMode} />
-      <Services isDarkMode={isDarkMode} />
-      <WorkSection projects={projects} isDarkMode={isDarkMode} />
-      <Certifs isDarkMode={isDarkMode} />
-      <Contact isDarkMode={isDarkMode} />
-      <Footer isDarkMode={isDarkMode} />
+    <div className="relative min-h-screen">
+      <CyberBinaryBackground isDarkMode={isDarkMode} />
+      <div className="relative z-10">
+        <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <Header className="mt-25" isDarkMode={isDarkMode} />
+        <About isDarkMode={isDarkMode} />
+        <Services isDarkMode={isDarkMode} />
+        <WorkSection projects={projects} isDarkMode={isDarkMode} />
+        <Certifs isDarkMode={isDarkMode} />
+        <Contact isDarkMode={isDarkMode} />
+        <Footer isDarkMode={isDarkMode} />
+      </div>
     </div>
   );
 }

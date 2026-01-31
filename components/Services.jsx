@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { myData, serviceData } from '../assets/assets';
+import { serviceData } from '../assets/assets';
 import Image from 'next/image';
 import { Dialog } from '@headlessui/react';
 import GradientText from './GradientText';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
 
 const Services = ({ isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,113 +20,107 @@ const Services = ({ isDarkMode }) => {
   };
 
   return (
-    <div id="services" className="w-full px-[12%] py-10 scroll-mt-20">
-      <h4 className="dark:text-white text-center mb-4 text-2xl font-Outfit font-semibold text-gray-700">
-        What I Offer
-      </h4>
-      <h2 className="text-center text-5xl font-Outfit mb-6 translate-y-6">
-        <GradientText
-          colors={
-            isDarkMode
-              ? ['#ff5c8d', '#7a4bff', '#ff5c8d', '#7a4bff', '#ff5c8d'] // Vibrant colors for dark mode
-              : ['#000000', '#808080', '#000000', '#808080', '#000000'] // Black and gray for light mode
-          }
-          animationSpeed={3}
-          showBorder={false}
-          className="custom-class"
-        >
-          My Services
-        </GradientText>
-      </h2>
-      <p className="text-center max-w-2xl sm:text-lg text-2xl mx-auto pt-12 mb-12 font-Outfit">
-        I am an experienced FrontEnd Developer with over a decade of
-        professional expertise in the field. Throughout my career, I have had
-        the privilege of collaborating with prestigious organizations,
-        contributing to their success and growth.
-      </p>
-
-      <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl md:text-4xl font-bold mb-16 dark:text-white relative">
+    <div
+      id="services"
+      className="w-full px-4 sm:px-6 lg:px-[10%] py-16 scroll-mt-20 bg-white dark:bg-cyber-dark"
+    >
+      <div className="max-w-6xl mx-auto">
+        <p className="text-center mb-2 font-mono text-sm text-cyber-cyan">
+          &gt; what I offer
+        </p>
+        <h2 className="text-center text-4xl sm:text-5xl font-bold mb-4">
           <GradientText
-            text="My Services"
-            animated={true}
-            as="span"
-            interactive={true}
-            colors="linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef, #6366f1)"
-          />
-          <div className="absolute w-24 h-1 bg-indigo-600 rounded left-1/2 transform -translate-x-1/2 bottom-0 mt-3"></div>
+            colors={
+              isDarkMode
+                ? ['#06b6d4', '#10b981', '#06b6d4', '#0891b2']
+                : ['#0f172a', '#06b6d4', '#0f172a', '#10b981']
+            }
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            My Services
+          </GradientText>
         </h2>
+        <p className="text-center text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-14">
+          Full Stack development, Cybersecurity awareness, System Administration,
+          and modern web & secure software engineering.
+        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {serviceData.map((service, index) => (
             <div
               key={index}
-              className="hover-card glass overflow-hidden relative rounded-xl p-8 transition-all duration-300 dark:text-white dark:border-gray-700 h-full"
+              onClick={() => openModal(service)}
+              className="group relative rounded-xl border border-slate-200 dark:border-cyber-border bg-slate-50/50 dark:bg-cyber-surface p-6 h-full transition-all duration-300 hover:border-cyber-cyan/50 hover:shadow-cyber-glow cursor-pointer"
             >
               <div className="flex flex-col h-full">
-                <div className="mb-4 text-indigo-600 dark:text-indigo-400">
-                  <div className="w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center animate-float">
+                <div className="mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-cyber-cyan/10 dark:bg-cyber-cyan/20 flex items-center justify-center text-cyber-cyan group-hover:bg-cyber-cyan/20 transition-colors">
                     <Image
                       src={service.icon}
                       alt={service.title}
-                      className="w-8 h-8"
+                      className="w-8 h-8 object-contain"
+                      width={32}
+                      height={32}
                     />
                   </div>
                 </div>
-
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 flex-grow">
+                <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm flex-grow line-clamp-3">
                   {service.description}
                 </p>
-
-                <div className="mt-6 flex items-center">
-                  <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
-                    Learn more
-                  </span>
-                  <ArrowRight className="w-4 h-4 ml-2 text-indigo-600 dark:text-indigo-400" />
+                <div className="mt-4 flex items-center text-cyber-cyan text-sm font-medium">
+                  <span>Learn more</span>
+                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
-
-                {/* Decorative element */}
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-100 dark:bg-indigo-900/20 rounded-full opacity-50 transform rotate-45"></div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Modal */}
       <Dialog
         open={isOpen}
         onClose={closeModal}
-        className="fixed inset-0 flex items-center justify-center p-4 backdrop-blur-md bg-darkHover bg-opacity-65"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       >
-        <Dialog.Panel className="bg-white dark:bg-darkHover rounded-lg shadow-lg p-6 max-w-md w-full relative">
+        <Dialog.Panel className="bg-white dark:bg-cyber-surface border border-slate-200 dark:border-cyber-border rounded-xl shadow-2xl p-6 max-w-md w-full relative">
           <button
-            className="absolute top-4 right-4 text-gray-600 dark:text-white text-2xl"
+            className="absolute top-4 right-4 p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-cyber-dark"
             onClick={closeModal}
+            aria-label="Close"
           >
-            ✖
+            <X className="w-5 h-5" />
           </button>
           {selectedService && (
             <>
-              <Image
-                src={selectedService.icon}
-                alt={selectedService.title}
-                className="w-16 mx-auto mb-6"
-              />
-              <h3 className="text-2xl font-bold text-center text-gray-700 dark:text-white mb-4">
+              <div className="w-16 h-16 rounded-xl bg-cyber-cyan/10 flex items-center justify-center mx-auto mb-4">
+                <Image
+                  src={selectedService.icon}
+                  alt={selectedService.title}
+                  width={36}
+                  height={36}
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-center text-slate-800 dark:text-slate-100 mb-3">
                 {selectedService.title}
               </h3>
-              <p className="text-center text-gray-600 dark:text-white/80 mb-6">
+              <p className="text-center text-slate-600 dark:text-slate-400 text-sm">
                 {selectedService.description}
               </p>
-              <ul className="text-sm text-gray-600 dark:text-white/80 space-y-2">
-                {selectedService.points?.map((point, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <span className="text-green-500">✅</span> {point}
-                  </li>
-                ))}
-              </ul>
+              {selectedService.points?.length > 0 && (
+                <ul className="mt-4 text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                  {selectedService.points.map((point, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="text-cyber-emerald">✓</span> {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </>
           )}
         </Dialog.Panel>

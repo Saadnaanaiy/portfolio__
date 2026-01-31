@@ -339,28 +339,37 @@ export const workData = [
 export const serviceData = [
   {
     icon: assets.web_icon,
-    title: 'Web design',
-    description: 'Web development is the process of building, programming...',
+    title: 'Web & Full Stack',
+    description:
+      'Building responsive web applications with modern stacks: React, Next.js, Node.js, and secure backend design.',
     link: '',
   },
   {
     icon: assets.mobile_icon,
-    title: 'Mobile app',
+    title: 'Mobile & APIs',
     description:
-      'Mobile app development involves creating software for mobile devices...',
+      'Mobile-ready interfaces and REST/GraphQL APIs with authentication and best security practices.',
     link: '',
   },
   {
     icon: assets.ui_icon,
-    title: 'UI/UX design',
+    title: 'UI/UX Design',
     description:
-      'UI/UX design focuses on creating a seamless user experience...',
+      'User-centered design and seamless experiences for web and dashboards.',
     link: '',
   },
   {
     icon: assets.graphics_icon,
-    title: 'Graphics design',
-    description: 'Creative design solutions to enhance visual communication...',
+    title: 'Cybersecurity',
+    description:
+      'Security-focused development, hardening systems, and understanding threats and defenses.',
+    link: '',
+  },
+  {
+    icon: assets.project_icon,
+    title: 'System Administration',
+    description:
+      'Infrastructure, automation (Ansible, Jenkins, Terraform), and Linux/Windows administration.',
     link: '',
   },
 ];
@@ -370,20 +379,27 @@ export const infoList = [
     icon: assets.code_icon,
     iconDark: assets.code_icon_dark,
     title: 'Languages',
-    description: 'HTML, CSS, JavaScript, PHP React Js, Next Js, Laravel',
+    description: 'HTML, CSS, JavaScript, PHP, React, Next.js, Laravel, Python, C/C++',
   },
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
     title: 'Education',
-    description: 'specialized institute of applied technology NTIC',
+    description: 'Higher School of Technology · Cybersecurity & System Admin Engineering (3rd year)',
   },
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
     title: 'Projects',
-    description: 'Built more than 5 projects',
+    description: 'Full Stack apps, secure systems, and automation projects',
   },
+];
+
+// Credly badges – add your Credly badge image URLs and links here
+// Get embed URLs from https://www.credly.com/users/your-username/badges
+export const credlyBadges = [
+  // Example: { img: 'https://images.credly.com/...', title: 'Badge Name', url: 'https://www.credly.com/badges/...' },
+  // Add your Credly badge objects when you have them
 ];
 export const toolsData = [
   {

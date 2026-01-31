@@ -66,24 +66,23 @@ const WorkSection = ({ isDarkMode }) => {
   return (
     <div
       id="work"
-      className="w-full px-4 md:px-[8%] py-20 scroll-mt-20 relative overflow-hidden"
+      className="w-full px-4 md:px-[8%] py-20 scroll-mt-20 relative overflow-hidden bg-white dark:bg-cyber-dark"
     >
-      {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-300 dark:bg-purple-900 opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-40 right-10 w-80 h-80 rounded-full bg-blue-300 dark:bg-blue-900 opacity-20 blur-3xl"></div>
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-cyber-cyan/10 dark:bg-cyber-cyan/5 blur-3xl" />
+        <div className="absolute bottom-40 right-10 w-80 h-80 rounded-full bg-cyber-emerald/10 dark:bg-cyber-emerald/5 blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <h4 className="dark:text-white text-center mb-4 text-2xl font-Outfit font-semibold text-gray-700 animate-fade-in">
-          My Projects
-        </h4>
-        <h2 className="text-center mb-16 text-5xl font-Outfit font-semibold animate-fade-in">
+        <p className="text-center mb-2 font-mono text-sm text-cyber-cyan">
+          &gt; projects
+        </p>
+        <h2 className="text-center mb-12 text-4xl sm:text-5xl font-bold animate-fade-in">
           <GradientText
             colors={
               isDarkMode
-                ? ['#ff5c8d', '#7a4bff', '#ff5c8d', '#7a4bff', '#ff5c8d']
-                : ['#000000', '#808080', '#000000', '#808080', '#000000']
+                ? ['#06b6d4', '#10b981', '#06b6d4', '#0891b2']
+                : ['#0f172a', '#06b6d4', '#0f172a', '#10b981']
             }
             animationSpeed={3}
             showBorder={false}
@@ -126,7 +125,7 @@ const WorkSection = ({ isDarkMode }) => {
                       height={675}
                       className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-cyber-dark/90 via-cyber-dark/40 to-transparent" />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-500">
                     <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
@@ -159,8 +158,8 @@ const WorkSection = ({ isDarkMode }) => {
                 </div>
               </SwiperSlide>
             ))}
-            <div className="swiper-button-prev !text-white after:!text-2xl"></div>
-            <div className="swiper-button-next !text-white after:!text-2xl"></div>
+            <div className="swiper-button-prev !text-cyber-cyan after:!text-2xl" />
+            <div className="swiper-button-next !text-cyber-cyan after:!text-2xl" />
           </Swiper>
         </div>
       </div>

@@ -2,193 +2,160 @@ import { assets } from '../assets/assets';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { Shield, Menu, X, Moon, Sun, ArrowRight } from 'lucide-react';
+
+const navLinks = [
+  { name: 'Home', href: '#top' },
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Work', href: '#work' },
+  { name: 'Certifications', href: '#certifs' },
+  { name: 'Contact', href: '#contact' },
+];
 
 const Navbar = ({ isDarkMode, setIsDarkMode }) => {
-  const [isScroll, setIsScroll] = useState(true);
-  const sideMenuRef = useRef();
-
-  const openMenu = () => {
-    sideMenuRef.current.style.transform = 'translateX(1rem)';
-  };
-
-  const closeMenu = () => {
-    sideMenuRef.current.style.transform = 'translateX(16rem)';
-  };
+  const [isScroll, setIsScroll] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const sideMenuRef = useRef(null);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (scrollY > 50) {
-        setIsScroll(true);
-      } else {
-        setIsScroll(false);
-      }
-    });
+    const onScroll = () => setIsScroll(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <div>
-      <div className="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden">
-        <Image src={assets.header_bg_color} alt="" className="w-full" />
-      </div>
+    <>
       <nav
-        className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50 ${
+        className={`w-full fixed px-4 sm:px-6 lg:px-8 xl:px-[8%] py-3 flex items-center justify-between z-50 transition-all duration-300 ${
           isScroll
-            ? 'bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkThem dark:shadow-white/20'
-            : ''
+            ? 'bg-slate-50/90 dark:bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-cyber-border/50 shadow-lg shadow-black/5'
+            : 'bg-transparent'
         }`}
       >
-        <a href="#top">
-          <h2 className="font-medium text-3xl">
-            Saad Naanaiy{' '}
-            <span className="text-red-500 font-extrabold text-2xl">.</span>
-          </h2>
-        </a>
-        <ul
-          className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
-            isScroll
-              ? ''
-              : 'bg-white bg-opacity-50 shadow-sm dark:border dark:border-white/50 dark:bg-transparent'
-          }`}
+        <a
+          href="#top"
+          className="flex items-center gap-2 group"
+          aria-label="Home"
         >
-          {[
-            { name: 'Home', href: '#top' },
-            { name: 'About me', href: '#about' },
-            { name: 'Services', href: '#services' },
-            { name: 'My Work', href: '#work' },
-            { name: 'My Certifications', href: '#certifs' },
-            { name: 'Contact Me', href: '#contact' },
-          ].map((link, index) => (
-            <li key={index} className="relative group">
+          <span className="font-mono text-xs text-cyber-cyan dark:text-cyber-cyan font-medium hidden sm:inline">
+            &gt;
+          </span>
+          <h2 className="font-semibold text-xl sm:text-2xl text-slate-800 dark:text-slate-100 group-hover:text-cyber-cyan dark:group-hover:text-cyber-cyan transition-colors">
+            Saad Naanaiy
+          </h2>
+          <span className="text-cyber-cyan font-mono font-bold">_</span>
+        </a>
+
+        <ul className="hidden md:flex items-center gap-1 lg:gap-2">
+          {navLinks.map((link) => (
+            <li key={link.href}>
               <a
                 href={link.href}
-                className="font-Outfit hover:text-gray-500 duration-300"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyber-cyan dark:hover:text-cyber-cyan hover:bg-cyber-cyan/10 dark:hover:bg-cyber-cyan/10 transition-all"
               >
                 {link.name}
               </a>
             </li>
           ))}
+          <li className="ml-2">
+            <a
+              href="https://www.credly.com/users/saad-naanaiy/badges#credly"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-cyber-emerald dark:text-cyber-emerald hover:bg-cyber-emerald/10 transition-all"
+              title="Credly badges"
+            >
+              <Shield className="w-4 h-4" />
+              Credly
+            </a>
+          </li>
         </ul>
-        <div className="flex items-center gap-4">
-          {/* Fixed Dark Mode Toggle Button */}
+
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setIsDarkMode((prev) => !prev)}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center justify-center"
-            aria-label="Toggle dark mode"
+            className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-cyber-surface transition-all"
+            aria-label="Toggle theme"
           >
-            <Image
-              src={isDarkMode ? assets.sun_icon : assets.moon_icon}
-              alt={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="w-6 h-6 transition-all duration-300"
-              width={24}
-              height={24}
-            />
+            {isDarkMode ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
           </button>
-
           <a
-            className="dark:border-white/50 hidden lg:flex items-center gap-3 px-10 py-3 border border-gray-500 rounded-full ml-4 dark:bg-darkThem dark:text-white font-medium shadow-lg hover:bg-gray-300 dark:hover:bg-darkHover hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
             href="#contact"
+            className="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-lg bg-cyber-cyan dark:bg-cyber-cyan text-cyber-dark font-semibold text-sm hover:bg-cyber-cyanDim dark:hover:bg-cyber-cyanDim transition-all shadow-cyber-glow"
           >
             Contact
-            <Image
-              className={`w-4 h-4 transition-all duration-300 ${
-                isDarkMode ? '' : 'filter invert'
-              }`}
-              alt="arrow"
-              src={assets.arrow_icon}
-              width={16}
-              height={16}
-            />
+            <ArrowRight className="w-4 h-4" />
           </a>
-
           <button
-            onClick={openMenu}
-            className="block md:hidden ml-3 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+            onClick={() => setMobileOpen(true)}
+            className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-cyber-surface"
+            aria-label="Open menu"
           >
-            <Image
-              className="w-6 h-6"
-              alt="menu"
-              src={isDarkMode ? assets.menu_white : assets.menu_black}
-              width={24}
-              height={24}
-            />
+            <Menu className="w-6 h-6" />
           </button>
         </div>
-
-        {/* Mobile menu */}
-        <ul
-          ref={sideMenuRef}
-          className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-0 top-0 bottom-0 w-64 z-50 h-screen bg-gray-100 rounded-lg transition duration-500 dark:bg-darkHover dark:text-white"
-          style={{ transform: 'translateX(16rem)' }}
-        >
-          <div
-            onClick={closeMenu}
-            className="absolute right-6 top-6 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-          >
-            <Image
-              src={isDarkMode ? assets.close_white : assets.close_black}
-              alt="close menu"
-              className="w-5 h-5 cursor-pointer"
-              width={20}
-              height={20}
-            />
-          </div>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#top"
-              onClick={closeMenu}
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#about"
-              onClick={closeMenu}
-            >
-              About me
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#services"
-              onClick={closeMenu}
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#work"
-              onClick={closeMenu}
-            >
-              My Work
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#certifs"
-              onClick={closeMenu}
-            >
-              My Certifications
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-Outfit block py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-              href="#contact"
-              onClick={closeMenu}
-            >
-              Contact Me
-            </a>
-          </li>
-        </ul>
       </nav>
-    </div>
+
+      {/* Mobile menu */}
+      <div
+        ref={sideMenuRef}
+        className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+        <div
+          className={`absolute top-0 right-0 w-full max-w-xs h-full bg-slate-50 dark:bg-cyber-surface border-l border-slate-200 dark:border-cyber-border shadow-2xl transition-transform duration-300 ${
+            mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-cyber-border">
+            <span className="font-mono text-cyber-cyan">&gt; menu</span>
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-cyber-dark"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <ul className="p-4 flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-3 px-4 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-cyber-cyan/10 hover:text-cyber-cyan font-medium"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="https://www.credly.com/users/saad-naanaiy/badges"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 py-3 px-4 rounded-lg text-cyber-emerald hover:bg-cyber-emerald/10 font-medium"
+              >
+                <Shield className="w-4 h-4" />
+                Credly Badges
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
   );
 };
 

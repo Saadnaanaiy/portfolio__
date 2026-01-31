@@ -1,65 +1,57 @@
-import { assets, myData } from '../assets/assets';
+import { assets } from '../assets/assets';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
+import { Github, Linkedin, Mail, Shield } from 'lucide-react';
 
-const Footer = ({ isDarkMode }) => {
+const Footer = () => {
+  const year = new Date().getFullYear();
+  const links = [
+    {
+      href: 'https://github.com/Saadnaanaiy',
+      label: 'GitHub',
+      icon: Github,
+    },
+    {
+      href: 'https://www.linkedin.com/in/saad-naanaiy-151a55278/',
+      label: 'LinkedIn',
+      icon: Linkedin,
+    },
+    {
+      href: 'https://www.credly.com/users/saad-naanaiy/badges',
+      label: 'Credly',
+      icon: Shield,
+    },
+    {
+      href: 'mailto:saadnaanaiy@gmail.com',
+      label: 'Email',
+      icon: Mail,
+    },
+  ];
+
   return (
-    <div>
-      {/* Copyright Section */}
-      {/* Social Links */}
-      <div className=" dark:text-white text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6">
-        <p className="mt-8 dark:text-white text-center text-gray-500 text-sm font-Outfit">
-          © {new Date().getFullYear()} Saad Naanaiy. All rights reserved.
+    <footer className="w-full px-4 sm:px-6 lg:px-[10%] py-8 bg-cyber-dark border-t border-cyber-border">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <p className="text-slate-400 text-sm font-medium">
+          © {year} Saad Naanaiy · Full Stack · Cybersecurity · System Admin · AI
         </p>
-        <ul className="flex justify-center items-center gap-6 mt-4">
-          <li className="dark:text-white flex items-center gap-2">
-            <Image
-              src={assets.github}
-              alt="GitHub"
-              className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-            />
-            <a
-              href="https://github.com/Saadnaanaiy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="dark:hover:text-gray-300 dark:text-white text-sm font-Outfit text-gray-600 hover:text-black transition-colors duration-300"
-            >
-              GitHub
-            </a>
-          </li>
-          <li className="flex items-center gap-2">
-            <Image
-              src={assets.linkedin}
-              alt="LinkedIn"
-              className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-            />
-            <a
-              href="https://www.linkedin.com/in/saad-naanaiy-151a55278/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="dark:hover:text-gray-300 dark:text-white text-sm font-Outfit text-gray-600 hover:text-black transition-colors duration-300"
-            >
-              LinkedIn
-            </a>
-          </li>
-          <li className="flex items-center gap-2">
-            <Image
-              src={assets.gmail}
-              alt="Email"
-              className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-            />
-            <a
-              href="mailto:saadnaanaiy@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="dark:hover:text-gray-300 dark:text-white text-sm font-Outfit text-gray-600 hover:text-black transition-colors duration-300"
-            >
-              Email
-            </a>
-          </li>
+        <ul className="flex items-center gap-6">
+          {links.map(({ href, label, icon: Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-slate-400 hover:text-cyber-cyan transition-colors text-sm font-medium"
+                aria-label={label}
+              >
+                <Icon className="w-5 h-5" />
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
-    </div>
+    </footer>
   );
 };
 

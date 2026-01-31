@@ -1,19 +1,25 @@
-import { Outfit, Ovo } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const outfit = Outfit({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-});
-
-const ovo = Ovo({
-  subsets: ['latin'],
-  weight: ['400'],
+  variable: '--font-cyber',
 });
 
 export const metadata = {
-  title: 'Portfolio - Saad Naanaiy',
-  description: 'Personal portfolio showcasing web development and design work',
+  title: 'Saad Naanaiy | Full Stack · Cybersecurity · System Admin · AI',
+  description:
+    'Portfolio of Saad Naanaiy — Full Stack Developer, Cybersecurity & System Administration Engineering student, AI enthusiast. Higher School of Technology.',
+  keywords: [
+    'Full Stack',
+    'Cybersecurity',
+    'System Administration',
+    'AI',
+    'Software Engineering',
+    'Next.js',
+    'Credly',
+  ],
   icons: {
     icon: [
       { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
@@ -26,16 +32,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html style={{ filter: 'saturate(1.3)' }}>
+    <html className={jetbrainsMono.variable} suppressHydrationWarning>
       <head>
-        {/* Favicon links */}
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        <meta name="theme-color" content="#4f46e5" />
+        <meta name="theme-color" content="#0a0e17" />
       </head>
       <body
-        className={`${outfit.className} ${ovo.className} scroll-smooth antialiased leading-8 overflow-x-hidden dark:bg-darkThem dark:text-white`}
+        className={`${jetbrainsMono.className} scroll-smooth leading-8 overflow-x-hidden dark:bg-cyber-dark dark:text-slate-100 bg-slate-50`}
         suppressHydrationWarning={true}
       >
         {children}
