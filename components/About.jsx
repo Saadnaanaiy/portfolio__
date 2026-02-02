@@ -76,8 +76,8 @@ const About = ({ isDarkMode }) => {
           </GradientText>
         </h2>
         <p className="text-center text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-12">
-          Full Stack Developer · Cybersecurity & System Administration
-          Engineering (3rd year) · Higher School of Technology
+          Cybersecurity Student · Web & Application Security · Systems Administration · AI
+          (3rd year) · Higher School of Technology
         </p>
 
         {/* Domain pills */}
@@ -109,7 +109,7 @@ const About = ({ isDarkMode }) => {
 
           <div className="flex-1 space-y-6 text-center lg:text-left">
             <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-              I specialize in technologies such as{' '}
+              I focus on secure-by-design development, systems administration, and web/app security while building with technologies such as{' '}
               {toolsData.slice(0, 3).map((tool, index) => (
                 <span
                   key={index}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 
-const BINARY_COUNT = 120;
+const BINARY_COUNT = 200;
 
 const BINARY_COLORS = [
   'text-cyber-cyan',
@@ -24,7 +24,7 @@ const CyberBinaryBackground = ({ isDarkMode }) => {
       delay: Math.random() * 12,
       duration: 6 + Math.random() * 8,
       size: 12 + Math.random() * 10,
-      opacity: 0.22 + Math.random() * 0.25,
+      opacity: 0.2 + Math.random() * 0.25,
       colorClass: BINARY_COLORS[Math.floor(Math.random() * BINARY_COLORS.length)],
     }));
   }, []);

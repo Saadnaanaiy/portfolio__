@@ -32,7 +32,7 @@ const Footer = () => {
     <footer className="w-full px-4 sm:px-6 lg:px-[10%] py-8 bg-cyber-dark border-t border-cyber-border">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <p className="text-slate-400 text-sm font-medium">
-          © {year} Saad Naanaiy · Full Stack · Cybersecurity · System Admin · AI
+          © {year} Saad Naanaiy · Cybersecurity · Web/App Security · Systems Administration · AI
         </p>
         <ul className="flex items-center gap-6">
           {links.map(({ href, label, icon: Icon }) => (

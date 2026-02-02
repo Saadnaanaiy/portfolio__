@@ -88,7 +88,7 @@ const WorkSection = ({ isDarkMode }) => {
             showBorder={false}
             className="custom-class"
           >
-            Creative Portfolio
+            Security & Development Projects
           </GradientText>
         </h2>
 

@@ -43,8 +43,8 @@ const Services = ({ isDarkMode }) => {
           </GradientText>
         </h2>
         <p className="text-center text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-14">
-          Full Stack development, Cybersecurity awareness, System Administration,
-          and modern web & secure software engineering.
+          Cybersecurity-first building: web & application security, systems administration,
+          secure development, and AI-driven automation.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -237,74 +237,73 @@ export const assets = {
 export const workData = [
   {
     title: 'Chat Application',
-    description: 'MERN Stack',
-    content: `🚀 MERN Stack App | Built with MongoDB, Express.js, React.js, and Node.js, this full-stack application ensures a seamless experience with JWT authentication 🔐 for secure user access and role-based authorization.
+    description: 'MERN Stack · Secure Auth',
+    content: `Full‑stack MERN application with authentication and role‑based access control.
 
-🎨 Frontend | Powered by React.js ⚛️, React Router 🚏, Private Routes 🔒, Ant Design 🎨, and Tailwind CSS 💨, delivering a modern, responsive UI.
-
-🛠 Backend | Developed using Node.js 🚀 and Express.js 🛠️, with MongoDB 🗄️ for efficient data handling, ensuring a scalable and high-performance system. ✅`,
+Security highlights:
+- JWT-based auth flow and protected routes
+- Input validation + safe API patterns
+- Built with scalability and security in mind`,
     bgImage: '/chatapp.png',
     githubLink: '',
     demoLink: 'https://fullstack-chat-app-pwzl.onrender.com/login',
   },
   {
     title: 'E-commerce Front-End Project',
-    description: 'Front-End',
-    content: `🚀 Frontend Project | Built using HTML 🏗️, CSS 🎨, and JavaScript ⚡, this sleek and responsive web application delivers an engaging user experience with clean design and smooth interactions.
+    description: 'Front-End · UX + Security Basics',
+    content: `Responsive storefront UI built with HTML, CSS, and JavaScript.
 
-🎨 Design & UI | Styled with CSS 💅, featuring Flexbox 📏, Grid 🎯, and animations ✨ to create a visually appealing and fully responsive layout across all devices.
-
-🛠 Functionality | Powered by JavaScript ⚙️, implementing dynamic elements, interactive features 🖱️, and seamless user interactions for an intuitive web experience. ✅
-
-`,
+Security-minded touches:
+- Safer DOM patterns (reduce XSS risk)
+- Form validation and clean UX flows`,
     bgImage: '/furni.png',
     githubLink: '',
     demoLink: 'https://furni-shop-house.netlify.app/',
   },
   {
     title: 'SCRUM Front-End Project',
-    description: 'Front-End',
-    content: `🚀 Project Management App | Built with React.js ⚛️ and React Graph 📊, this powerful frontend application delivers a seamless experience for managing tasks, projects, and team collaboration—similar to Jira.
+    description: 'React · Project Management UI',
+    content: `Jira-like frontend built with React.
 
-🎨 Modern UI & UX | Designed with a sleek interface using CSS 💅, responsive layouts 📱, and intuitive drag-and-drop functionality 🖱️ for effortless project organization.
-
-🛠 Dynamic Functionality | Integrated with React Graph 🔗 for interactive data visualization, real-time task updates 🔄, and a smooth, efficient workflow for teams ✅.`,
+Security mindset:
+- Role-aware UX patterns (admin vs user flows)
+- Clean component structure to support future auth/integration`,
     bgImage: '/jira.png',
     githubLink: '',
     demoLink: 'https://jirana.netlify.app/',
   },
   {
     title: 'Restaurant Project',
-    description: 'Front-End',
-    content: `🔥 Grilli – Restaurant Management App | Built with React.js ⚛️, Grilli is a sleek and modern restaurant platform that streamlines menu management 📜, online ordering 🛒, and reservation handling 🏷️ for a seamless dining experience.
+    description: 'React · UI + Routing',
+    content: `Restaurant UI built with React, Tailwind, and Ant Design.
 
-🎨 Modern UI & UX | Designed with Tailwind CSS 💨 and Ant Design 🎨, featuring a visually appealing, responsive interface with elegant food displays 🍽️ and intuitive navigation.
-
-🛠 Dynamic Functionality | Powered by React Router 🚏 for smooth navigation, state management ⚙️ for real-time order updates 🔄, and an efficient booking system 📆 to enhance restaurant operations. ✅`,
+Security considerations:
+- Prepared for secure API integration (auth, validation)
+- Clean routing structure for protected pages`,
     bgImage: '/grilli.png',
     githubLink: '',
     demoLink: 'https://grilli-master-restaurant.netlify.app/',
   },
   {
     title: '3D Portfolio website',
-    description: 'Front-End',
-    content: `🚀 Portfolio – 3D Interactive Web Experience | Built with React.js ⚛️ and Next.js 🚀, Portfolio showcases a cutting-edge 3D web experience using Three.js 🎮, delivering immersive animations and dynamic interactions.
+    description: 'Next.js · 3D UI',
+    content: `3D portfolio built with React, Next.js, and Three.js.
 
-🎨 Futuristic UI & UX | Designed with Three.js 🖼️ for realistic 3D models 🏗️, smooth animations 🎞️, and interactive elements ✨, creating a visually stunning portfolio presentation.
-
-🛠 High-Performance Architecture | Powered by Next.js ⚡ for server-side rendering, optimized state management ⚙️, and seamless navigation 🚏, ensuring a fast and engaging user experience. ✅`,
+Security baseline:
+- Safer Next.js patterns and deployment awareness
+- Focus on performance + reliable UI behavior`,
     bgImage: '/3d.png',
     githubLink: '',
     demoLink: 'https://project-3d-saad.netlify.app/',
   },
   {
     title: 'Geo based app',
-    description: 'Mobile App',
-    content: `🚀 MERN Stack App | Built with MongoDB, Express.js, React.js, and Node.js, this full-stack application ensures a seamless experience with JWT authentication 🔐 for secure user access and role-based authorization.
+    description: 'Mobile App · Location Data',
+    content: `Geo/location-based app concept with attention to privacy and secure handling of user data.
 
-🎨 Frontend | Powered by React.js ⚛️, React Router 🚏, Private Routes 🔒, Ant Design 🎨, and Tailwind CSS 💨, delivering a modern, responsive UI.
-
-🛠 Backend | Developed using Node.js 🚀 and Express.js 🛠️, with MongoDB 🗄️ for efficient data handling, ensuring a scalable and high-performance system. ✅`,
+Security considerations:
+- Data minimization mindset
+- Permission-aware UX`,
     bgImage: '/chatapp.png',
     githubLink: '',
     demoLink: 'https://fullstack-chat-app-pwzl.onrender.com/login',
@@ -313,23 +312,14 @@ export const workData = [
     title: 'Photography site',
     description: 'Web Design',
     bgImage: '/chatapp.png',
-    content: `🚀 MERN Stack App | Built with MongoDB, Express.js, React.js, and Node.js, this full-stack application ensures a seamless experience with JWT authentication 🔐 for secure user access and role-based authorization.
-
-🎨 Frontend | Powered by React.js ⚛️, React Router 🚏, Private Routes 🔒, Ant Design 🎨, and Tailwind CSS 💨, delivering a modern, responsive UI.
-
-🛠 Backend | Developed using Node.js 🚀 and Express.js 🛠️, with MongoDB 🗄️ for efficient data handling, ensuring a scalable and high-performance system. ✅`,
+    content: `Photography website UI concept with performance and secure defaults in mind.`,
     githubLink: '',
     demoLink: 'https://fullstack-chat-app-pwzl.onrender.com/login',
   },
   {
     title: 'UI/UX designing',
     description: 'UI/UX Design',
-    content: `🚀 MERN Stack App | Built with MongoDB, Express.js, React.js, and Node.js, this full-stack application ensures a seamless experience with JWT authentication 🔐 for secure user access and role-based authorization.
-
-🎨 Frontend | Powered by React.js ⚛️, React Router 🚏, Private Routes 🔒, Ant Design 🎨, and Tailwind CSS 💨, delivering a modern, responsive UI.
-
-🛠 Backend | Developed using Node.js 🚀 and Express.js 🛠️, with MongoDB 🗄️ for efficient data handling, ensuring a scalable and high-performance system. ✅`,
-    content: '',
+    content: `UI/UX work with a focus on clarity, accessibility, and reducing risky user flows (phishing-like patterns, confusing permissions).`,
     bgImage: '/chatapp.png',
     githubLink: '',
     demoLink: 'https://fullstack-chat-app-pwzl.onrender.com/login',
@@ -339,38 +329,63 @@ export const workData = [
 export const serviceData = [
   {
     icon: assets.web_icon,
-    title: 'Web & Full Stack',
+    title: 'Secure Web & App Development',
     description:
-      'Building responsive web applications with modern stacks: React, Next.js, Node.js, and secure backend design.',
+      'Building modern web apps with secure-by-design patterns: authentication, authorization, input validation, and safe APIs.',
     link: '',
+    points: [
+      'Secure auth flows (sessions/JWT) & RBAC',
+      'OWASP Top 10 aware implementation',
+      'Defensive coding + logging basics',
+    ],
   },
   {
     icon: assets.mobile_icon,
-    title: 'Mobile & APIs',
+    title: 'Web & Application Security',
     description:
-      'Mobile-ready interfaces and REST/GraphQL APIs with authentication and best security practices.',
+      'Hands-on focus on web security testing and mitigation: common vulnerabilities, threat modeling, and secure configuration.',
     link: '',
+    points: [
+      'OWASP Top 10: XSS, SQLi, SSRF, CSRF...',
+      'Secure headers, cookies, and CORS',
+      'Basic pentest methodology & reporting',
+    ],
   },
   {
     icon: assets.ui_icon,
-    title: 'UI/UX Design',
+    title: 'AI & Security Automation',
     description:
-      'User-centered design and seamless experiences for web and dashboards.',
+      'Using Python/AI to automate repetitive security and admin tasks: parsing logs, detection ideas, and workflow scripts.',
     link: '',
+    points: [
+      'Automation scripts (Python)',
+      'Log parsing & simple detections',
+      'Security tooling helpers & dashboards',
+    ],
   },
   {
     icon: assets.graphics_icon,
-    title: 'Cybersecurity',
+    title: 'Systems Administration & Hardening',
     description:
-      'Security-focused development, hardening systems, and understanding threats and defenses.',
+      'Linux/Windows administration, services, networking basics, and hardening practices to reduce attack surface.',
     link: '',
+    points: [
+      'Users/groups, services, permissions',
+      'Hardening basics + patching mindset',
+      'Nginx setup and secure configs',
+    ],
   },
   {
     icon: assets.project_icon,
-    title: 'System Administration',
+    title: 'Cloud & DevSecOps Foundations',
     description:
-      'Infrastructure, automation (Ansible, Jenkins, Terraform), and Linux/Windows administration.',
+      'Learning cloud + automation with a security mindset: IaC basics, CI/CD awareness, and secure deployments.',
     link: '',
+    points: [
+      'AWS/GCP fundamentals',
+      'Automation: Ansible / Jenkins / Terraform',
+      'Secure deployment basics',
+    ],
   },
 ];
 

@@ -18,12 +18,12 @@ import {
 import ClickSpark from './ClickSpark';
 
 const roles = [
-  'Full Stack Developer',
   'Cybersecurity Student',
-  'System Administration Engineer',
-  'AI Enthusiast',
-  'Software Engineer',
-  'Frontend & Backend Developer',
+  'Web & App Security',
+  'Systems Administration',
+  'AI & Security Automation',
+  'Secure Full Stack Developer',
+  'DevSecOps Learner',
 ];
 
 const ParticleBackground = () => {
@@ -276,9 +276,9 @@ const Header = ({ isDarkMode }) => {
                 isDarkMode ? 'text-slate-400' : 'text-slate-600'
               }`}
             >
-              Higher School of Technology · Full Stack (+2 years) · 3rd year
-              Cybersecurity & System Administration Engineering · Building
-              secure, scalable systems and modern web experiences.
+              Higher School of Technology · 3rd year Cybersecurity & Systems
+              Administration Engineering · Focused on web/app security, secure
+              coding, automation, and AI-driven tooling.
             </p>
 
             <div className="flex justify-center gap-2 mb-6 animate-in">

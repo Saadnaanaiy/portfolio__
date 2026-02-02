@@ -127,11 +127,11 @@ const ParticleWave = ({ count = 1000, color }) => {
 // Main scene component
 const HeroSceneContent = ({ isDarkMode }) => {
   const skills = [
-    { name: 'React', color: "#61dafb", position: [-3, 0, -2] },
-    { name: 'Next.js', color: isDarkMode ? '#ffffff' : '#000000', position: [3, 1, -4] },
-    { name: 'Three.js', color: '#049ef4', position: [4, -1, -3] },
-    { name: 'UI/UX', color: '#6b6b6b', position: [-5, -0.5, -5] },
-    { name: 'Tailwind', color: '#38bdf8', position: [2, 2, -6] }
+    { name: 'Linux', color: '#f59e0b', position: [-3, 0, -2] },
+    { name: 'OWASP', color: isDarkMode ? '#ffffff' : '#000000', position: [3, 1, -4] },
+    { name: 'SIEM', color: '#10b981', position: [4, -1, -3] },
+    { name: 'AI', color: '#f43f5e', position: [-5, -0.5, -5] },
+    { name: 'Cloud', color: '#38bdf8', position: [2, 2, -6] }
   ];
 
   const textColor = isDarkMode ? '#ffffff' : '#000000';
@@ -149,7 +149,7 @@ const HeroSceneContent = ({ isDarkMode }) => {
       />
 
       <FloatingText
-        text="Portfolio"
+        text="Cyber Portfolio"
         position={[0, 2, 0]}
         color={textColor}
         size={2}
@@ -157,10 +157,10 @@ const HeroSceneContent = ({ isDarkMode }) => {
       />
 
       <FloatingText
-        text="Creative Developer"
+        text="Cybersecurity Student · Systems Admin · Web/App Security · AI"
         position={[0, 0, 0]}
         color={isDarkMode ? '#a5b4fc' : '#4f46e5'}
-        size={1}
+        size={0.7}
         isDarkMode={isDarkMode}
       />
 
