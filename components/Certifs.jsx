@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Award, ChevronRight, ExternalLink, Lock, Shield, X } from 'lucide-react';
 import Image from 'next/image';
-import { myData, credlyBadges } from '../assets/assets';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Shield, ExternalLink, Award, ChevronRight, Lock } from 'lucide-react';
-import GradientText from './GradientText';
+import { useEffect, useState } from 'react';
+import { credlyBadges, myData } from '../assets/assets';
 
 const CREDLY_PROFILE_URL = 'https://www.credly.com/users/saad-naanaiy/badges';
 
@@ -66,19 +65,8 @@ const Certifs = ({ isDarkMode }) => {
             <Lock className="w-3.5 h-3.5" />
             credentials
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <GradientText
-              colors={
-                isDarkMode
-                  ? ['#06b6d4', '#10b981', '#06b6d4', '#0891b2']
-                  : ['#0f172a', '#06b6d4', '#0f172a', '#10b981']
-              }
-              animationSpeed={3}
-              showBorder={false}
-              className="custom-class"
-            >
-              Certifications & Badges
-            </GradientText>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-slate-800 dark:text-white">
+            Certifications & Badges
           </h2>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
             Verified professional certificates and Credly badges in Full Stack, Cybersecurity, and IT.

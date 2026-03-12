@@ -1,88 +1,96 @@
-import user_image from './user-image.png';
-import code_icon from './code-icon.png';
-import code_icon_dark from './code-icon-dark.png';
-import edu_icon from './edu-icon.png';
-import edu_icon_dark from './edu-icon-dark.png';
-import project_icon from './project-icon.png';
-import project_icon_dark from './project-icon-dark.png';
-import vscode from './vscode.png';
-import firebase from './firebase.png';
-import figma from './figma.png';
-import git from './git.png';
-import mongodb from './mongodb.png';
-import right_arrow_white from './right-arrow-white.png';
-import logo from './logo.png';
-import logo_dark from './logo_dark.png';
-import mail_icon from './mail_icon.png';
-import mail_icon_dark from './mail_icon_dark.png';
-import profile_img from './profile-img.png';
-import download_icon from './download-icon.png';
-import hand_icon from './hand-icon.png';
-import header_bg_color from './header-bg-color.png';
-import moon_icon from './moon_icon.png';
-import sun_icon from './sun_icon.png';
-import arrow_icon from './arrow-icon.png';
+import ansible from './Ansible.png';
 import arrow_icon_dark from './arrow-icon-dark.png';
-import menu_black from './menu-black.png';
-import menu_white from './menu-white.png';
+import arrow_icon from './arrow-icon.png';
+import AWS from './AWS.png';
+import bash from './Bash.png';
+import C from './C.png';
+import Cplus from './c_6132222.png';
 import close_black from './close-black.png';
 import close_white from './close-white.png';
-import web_icon from './web-icon.png';
-import mobile_icon from './mobile-icon.png';
-import ui_icon from './ui-icon.png';
+import code_icon_dark from './code-icon-dark.png';
+import code_icon from './code-icon.png';
+import communication from "./communication.png";
+import composer from './Composer.png';
+import critical_thinking from './critical-thinking.png';
+import download_icon from './download-icon.png';
+import edu_icon_dark from './edu-icon-dark.png';
+import edu_icon from './edu-icon.png';
+import figma from './figma.png';
+import firebase from './firebase.png';
+import gcp from './gcp.png';
+import git from './git.png';
 import graphics_icon from './graphics-icon.png';
-import right_arrow from './right-arrow.png';
-import send_icon from './send-icon.png';
-import right_arrow_bold from './right-arrow-bold.png';
-import right_arrow_bold_dark from './right-arrow-bold-dark.png';
+import hand_icon from './hand-icon.png';
+import header_bg_color from './header-bg-color.png';
+import cube_icon from './icons/cube.png';
 import docker from './icons/docker.png';
+import github from './icons/github.png';
+import gmail from './icons/gmail.png';
 import graphql from './icons/graphql.png';
 import javascript from './icons/javascript.png';
 import kubernetes from './icons/kubernetes.png';
 import laravel from './icons/laravel.png';
-import php from './icons/php.png';
-import nextjs from './icons/next.png';
-import reactjs from './icons/reactjs.png';
-import mySql from './icons/mysql.png';
-import nginx from './icons/nginx.png';
 import linkedin from './icons/linkedin.png';
-import github from './icons/github.png';
+import mySql from './icons/mysql.png';
+import nextjs from './icons/next.png';
+import nginx from './icons/nginx.png';
+import php from './icons/php.png';
+import reactjs from './icons/reactjs.png';
 import twitter from './icons/twitter.png';
-import nextjs_white from './icons/nextjswhite.png';
-import gmail from './icons/gmail.png';
+import agile from './images/agile.png';
 import aiImage from './images/ai.png';
 import backendImage from './images/backend.png';
-import fullstackImg from './images/fullstack.png';
+import cloud from './images/cloud.png';
 import completeWeb from './images/completeWeb.png';
 import forage from './images/forage.png';
-import ultimate from './images/ultimate.png';
-import js from './images/js.png';
 import frontend from './images/frontend.png';
-import cloud from './images/cloud.png';
-import python from './images/python.png';
+import fullstackImg from './images/fullstack.png';
+import js from './images/js.png';
 import theLaravel from './images/laravel.png';
-import agile from './images/agile.png';
-import cube_icon from './icons/cube.png';
-import communication from "./communication.png";
-import critical_thinking from './critical-thinking.png';
+import python from './images/python.png';
+import ultimate from './images/ultimate.png';
 import innovation from './innovation.png';
-import timemanagment from './timemanagement.png';
-import learning from './learning_7870965.png';
 import java from './java_226777.png';
-import Cplus from './c_6132222.png';
-import python_ from './python.png';
-import linux from './linux.png';
-import window from './windows.png';
-import C from './C.png';
-import composer from './Composer.png';
-import npm from './NPM.png';
-import postman from './Postman.png';
-import RabbitMQ from './RabbitMQ.png';
-import AWS from './AWS.png';
-import gcp from './gcp.png';
-import ansible from './Ansible.png';
 import jenkins from './Jenkins.png';
+import learning from './learning_7870965.png';
+import linux from './linux.png';
+import logo from './logo.png';
+import logo_dark from './logo_dark.png';
+import mail_icon from './mail_icon.png';
+import mail_icon_dark from './mail_icon_dark.png';
+import matplotlib from './Matplotlib.png';
+import menu_black from './menu-black.png';
+import menu_white from './menu-white.png';
+import mobile_icon from './mobile-icon.png';
+import mongodb from './mongodb.png';
+import moon_icon from './moon_icon.png';
+import npm from './NPM.png';
+import numpy from './NumPy.png';
+import pandas from './Pandas.png';
+import mathplotlib from './Matplotlib.png';
+import spring_boot from './spring-boot.png';
+import dart from './Dart.png';
+import flutter from './Flutter.png';
+import postman from './Postman.png';  
+import profile_img from './profile-img.png';
+import project_icon_dark from './project-icon-dark.png';
+import project_icon from './project-icon.png';
+import python_ from './python.png';
+import RabbitMQ from './RabbitMQ.png';
+import right_arrow_bold_dark from './right-arrow-bold-dark.png';
+import right_arrow_bold from './right-arrow-bold.png';
+import right_arrow_white from './right-arrow-white.png';
+import right_arrow from './right-arrow.png';
+import send_icon from './send-icon.png';
+import sun_icon from './sun_icon.png';
+import terminal from './terminal.png';
 import terraform from './terraform.png';
+import timemanagment from './timemanagement.png';
+import ui_icon from './ui-icon.png';
+import user_image from './user-image.png';
+import vscode from './vscode.png';
+import web_icon from './web-icon.png';
+import window from './windows.png';
 
 
 
@@ -232,6 +240,14 @@ export const assets = {
   ansible,
   jenkins,
   terraform,
+  matplotlib,
+  pandas,
+  numpy,
+  bash,
+  terminal,
+  dart,
+  flutter,
+  
 };
 
 export const workData = [
@@ -605,4 +621,46 @@ export const toolsData = [
     title: 'Terraform',
     category: 'Automation Tools',
   },
+
+  {
+    src: bash,
+    title: 'Bash Scripting',
+    category: 'Bash scripting',
+  },
+  {
+    src: terminal,
+    title: 'Terminal',
+    category: 'Terminal-Based Editors',
+  },
+  {
+    src: matplotlib,
+    title: 'Matplotlib',
+    category: 'Python Data & Scientific Computing Stack',
+  },
+  {
+    src: pandas,
+    title: 'Pandas',
+    category: 'Python Data & Scientific Computing Stack',
+  },
+  {
+    src: numpy,
+    title: 'NumPy',
+    category: 'Python Data & Scientific Computing Stack',
+  },
+  {
+    src: bash,
+    title: 'Bash Scripting',
+    category: 'Tools',
+  },
+  {
+    src: terminal,
+    title: 'Terminal',
+    category: 'Tools',
+  },
+
+  {
+   
+  },
+ 
+  
 ];

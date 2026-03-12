@@ -1,182 +1,143 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { workData } from '../assets/assets';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FaShieldAlt, FaSkullCrossbones, FaVirus } from 'react-icons/fa';
-import { GiWorms } from 'react-icons/gi';
-import About from '../components/About';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import Services from '../components/Services';
-import WorkSection from '../components/WorkSection';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
-import Certifs from '../components/Certifs';
-import CyberBinaryBackground from '../components/CyberBinaryBackground';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { workData } from "../assets/assets";
+import About from "../components/About";
+import Certifs from "../components/Certifs";
+import Contact from "../components/Contact";
+import CyberBinaryBackground from "../components/CyberBinaryBackground";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import Services from "../components/Services";
+import WorkSection from "../components/WorkSection";
 
-const LOADING_ITEMS = [
-  {
-    id: 'virus',
-    label: 'Virus detected',
-    Icon: FaVirus,
-    colorClass: 'text-cyber-rose',
-    bgClass: 'bg-cyber-rose/10',
-    ringClass: 'ring-cyber-rose/30',
-    glowClass: 'shadow-[0_0_28px_rgba(244,63,94,0.35)]',
-  },
-  {
-    id: 'trojan',
-    label: 'Trojan activity',
-    Icon: FaSkullCrossbones,
-    colorClass: 'text-cyber-amber',
-    bgClass: 'bg-cyber-amber/10',
-    ringClass: 'ring-cyber-amber/30',
-    glowClass: 'shadow-[0_0_28px_rgba(245,158,11,0.35)]',
-  },
-  {
-    id: 'worm',
-    label: 'Worm propagation',
-    Icon: GiWorms,
-    colorClass: 'text-cyber-emerald',
-    bgClass: 'bg-cyber-emerald/10',
-    ringClass: 'ring-cyber-emerald/30',
-    glowClass: 'shadow-[0_0_28px_rgba(16,185,129,0.35)]',
-  },
-  {
-    id: 'defender',
-    label: 'Defender online',
-    Icon: FaShieldAlt,
-    colorClass: 'text-cyber-cyan',
-    bgClass: 'bg-cyber-cyan/10',
-    ringClass: 'ring-cyber-cyan/30',
-    glowClass: 'shadow-cyber-glow',
-  },
-];
+const STORAGE_KEY = "portfolio-theme";
+const DARK_THEME_COLOR = "#0a0e17";
+const LIGHT_THEME_COLOR = "#f8fafc";
 
-const Loading = ({ isDarkMode }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const getPreferredTheme = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % LOADING_ITEMS.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
+  const savedTheme = window.localStorage.getItem(STORAGE_KEY);
 
-  const active = LOADING_ITEMS[activeIndex];
+  if (savedTheme === "dark") {
+    return true;
+  }
 
-  return (
-    <div
-      className={`fixed inset-0 flex items-center justify-center bg-cyber-grid bg-[length:40px_40px] ${
-        isDarkMode ? 'bg-cyber-dark' : 'bg-slate-50'
-      }`}
-    >
-      <div className="relative flex flex-col items-center">
-        <div className="relative w-28 h-28 mb-6">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={active.id}
-              initial={{ opacity: 0, y: 10, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.92 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-              className={`w-28 h-28 rounded-2xl ring-2 ${active.ringClass} ${active.bgClass} ${active.glowClass} flex items-center justify-center`}
-              aria-label={active.label}
-            >
-              <motion.div
-                animate={{ rotate: [0, -2, 2, 0] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-                className={`${active.colorClass} text-5xl`}
-              >
-                <active.Icon />
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+  if (savedTheme === "light") {
+    return false;
+  }
 
-        <div className="text-3xl font-bold tracking-wider text-cyber-cyan font-mono">
-          <span className="inline-block animate-bounce-slow">S</span>
-          <span className="inline-block animate-bounce-slow animation-delay-200">N</span>
-        </div>
-
-        <div className={`mt-4 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-          <span className="font-mono">
-            <span className="text-cyber-cyan">{'>'} </span>
-            <span className={active.colorClass}>{active.label}</span>
-            <span className="ml-2 inline-block animate-pulse">loading…</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  );
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
 };
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const themeTimerRef = useRef(null);
 
-  const projects = workData.map((project, index) => ({
-    id: index,
-    title: project.title,
-    description: project.desc,
-    image: project.img,
-    technologies: ['React', 'Next.js'],
-    demoUrl: project.link,
-    githubUrl: project.github,
-  }));
+  const projects = useMemo(
+    () =>
+      workData.map((project, index) => ({
+        id: index,
+        title: project.title,
+        description: project.desc,
+        image: project.img,
+        technologies: ["React", "Next.js"],
+        demoUrl: project.link,
+        githubUrl: project.github,
+      })),
+    [],
+  );
+
+  const applyTheme = (nextIsDarkMode) => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const root = document.documentElement;
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    root.classList.add("theme-animate");
+    root.classList.toggle("dark", nextIsDarkMode);
+    root.style.colorScheme = nextIsDarkMode ? "dark" : "light";
+    root.dataset.themeReady = "true";
+
+    if (metaTheme) {
+      metaTheme.setAttribute(
+        "content",
+        nextIsDarkMode ? DARK_THEME_COLOR : LIGHT_THEME_COLOR,
+      );
+    }
+
+    window.localStorage.setItem(STORAGE_KEY, nextIsDarkMode ? "dark" : "light");
+
+    window.clearTimeout(themeTimerRef.current);
+    themeTimerRef.current = window.setTimeout(() => {
+      root.classList.remove("theme-animate");
+    }, 180);
+  };
+
+  const toggleTheme = () => {
+    const nextIsDarkMode = !isDarkMode;
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (
+      !reduceMotion &&
+      typeof document !== "undefined" &&
+      typeof document.startViewTransition === "function"
+    ) {
+      document.startViewTransition(() => {
+        applyTheme(nextIsDarkMode);
+        setIsDarkMode(nextIsDarkMode);
+      });
+      return;
+    }
+
+    applyTheme(nextIsDarkMode);
+    setIsDarkMode(nextIsDarkMode);
+  };
 
   useEffect(() => {
     setIsMounted(true);
 
-    if (typeof window !== 'undefined') {
-      // Always start in light mode, regardless of previous preference
-      setIsDarkMode(false);
-      document.documentElement.classList.remove('dark');
+    const currentTheme = getPreferredTheme();
+    setIsDarkMode(currentTheme);
+    applyTheme(currentTheme);
 
-      // Don't read from localStorage - always default to light
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = (event) => {
+      const storedTheme = window.localStorage.getItem(STORAGE_KEY);
+      if (storedTheme === "dark" || storedTheme === "light") {
+        return;
+      }
 
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 8000);
+      setIsDarkMode(event.matches);
+      applyTheme(event.matches);
+    };
 
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) return;
-
-    const root = document.documentElement;
-    root.classList.add('theme-transition');
-    const transitionTimer = setTimeout(() => {
-      root.classList.remove('theme-transition');
-    }, 450);
-
-    if (isDarkMode) {
-      root.classList.add('dark');
-      localStorage.theme = 'dark';
-    } else {
-      root.classList.remove('dark');
-      localStorage.theme = 'light'; // Store light preference explicitly
-    }
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
 
     return () => {
-      clearTimeout(transitionTimer);
-      root.classList.remove('theme-transition');
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+      window.clearTimeout(themeTimerRef.current);
     };
-  }, [isDarkMode, isMounted]);
+  }, []);
 
-  if (!isMounted || isLoading) {
-    return <Loading isDarkMode={isDarkMode} />;
+  if (!isMounted) {
+    return <div className="min-h-screen bg-slate-50 dark:bg-cyber-dark" />;
   }
 
   return (
     <div className="relative min-h-screen">
       <CyberBinaryBackground isDarkMode={isDarkMode} />
       <div className="relative z-10">
-        <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <Header className="mt-25" isDarkMode={isDarkMode} />
         <About isDarkMode={isDarkMode} />
         <Services isDarkMode={isDarkMode} />

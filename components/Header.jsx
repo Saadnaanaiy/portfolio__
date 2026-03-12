@@ -1,12 +1,3 @@
-import { assets } from '../assets/assets';
-import Image from 'next/image';
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { gsap } from 'gsap';
-import GradientText from './GradientText';
-import TypewriterComponent from 'typewriter-effect';
-import LetterGlitch from './LetterGlitch';
-import Link from 'next/link';
 import {
   ChevronDown,
   Download,
@@ -14,328 +5,164 @@ import {
   Linkedin,
   Mail,
   Shield,
-} from 'lucide-react';
-import ClickSpark from './ClickSpark';
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { assets } from "../assets/assets";
 
 const roles = [
-  'Cybersecurity Student',
-  'Web & App Security',
-  'Systems Administration',
-  'AI & Security Automation',
-  'Secure Full Stack Developer',
-  'DevSecOps Learner',
+  "Cybersecurity Student",
+  "Web & App Security",
+  "Systems Administration",
+  "AI & Security Automation",
+  "Secure Full Stack Developer",
+  "DevSecOps Learner",
 ];
-
-const ParticleBackground = () => {
-  const canvasRef = useRef(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationFrameId;
-
-    // Resize canvas to full window
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Regenerate particles on resize
-      generateParticles();
-    };
-
-    // Generate particles
-    const generateParticles = () => {
-      particles = [];
-      const particleCount = Math.floor(
-        (window.innerWidth * window.innerHeight) / 10000,
-      );
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
-          opacity: Math.random() * 0.5 + 0.1,
-        });
-      }
-    };
-
-    // Animation loop
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-
-        // Draw particle
-        ctx.fillStyle = `rgba(6, 182, 212, ${p.opacity})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Update position
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        // Wrap around edges
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-
-        // Connect particles within distance
-        connectParticles(p, i);
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    // Draw lines between close particles
-    const connectParticles = (p, index) => {
-      for (let j = index + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const distance = Math.sqrt(
-          Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2),
-        );
-
-        if (distance < 100) {
-          ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    };
-
-    // Initial setup
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    animate();
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  // Prevent hydration errors by only rendering on client
-  if (!isMounted) return null;
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
-    />
-  );
-};
 
 const Header = ({ isDarkMode }) => {
   const [roleIndex, setRoleIndex] = useState(0);
-  const roleRef = useRef(null);
-  const headerRef = useRef(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  const splitTextIntoLetters = (text) => {
-    if (!text) return [];
-    return text.split('').map((char, index) => ({
-      char,
-      delay: index * 0.1,
-    }));
-  };
 
   useEffect(() => {
-    setIsMounted(true);
-
     const interval = setInterval(() => {
       setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 3000);
+    }, 2200);
 
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (!isMounted) return;
-
-    if (roleRef.current) {
-      const letters = roleRef.current.querySelectorAll('.letter');
-      gsap.fromTo(
-        letters,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
-          stagger: 0.1,
-        },
-      );
-    }
-  }, [roleIndex, isMounted]);
-
-  useEffect(() => {
-    if (!isMounted) return;
-
-    const header = headerRef.current;
-    if (!header) return;
-
-    gsap.fromTo(
-      header.querySelectorAll('.animate-in'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.3,
-      },
-    );
-  }, [isMounted]);
-
-  if (!isMounted) return <div className="min-h-screen"></div>;
-
   return (
     <header
-      ref={headerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4"
       id="home"
     >
-      <ParticleBackground />
-
-      <div className="absolute inset-0">
-        <ClickSpark
-          sparkColor={['#06b6d4', '#10b981', '#0891b2']}
-          sparkCount={15}
-          enableGlow={true}
-          pulseEffect={true}
-        />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-cyber-cyan/10 to-transparent" />
+        <div className="absolute left-[-8%] top-[18%] h-56 w-56 rounded-full bg-cyber-cyan/10 blur-3xl" />
+        <div className="absolute right-[-10%] top-[12%] h-72 w-72 rounded-full bg-cyber-emerald/10 blur-3xl" />
+        <div className="absolute bottom-[15%] left-[12%] h-44 w-44 rounded-full bg-cyber-amber/10 blur-3xl" />
+        <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(6,182,212,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.07)_1px,transparent_1px)] [background-size:36px_36px]" />
       </div>
 
-      <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center">
-            <div className="mb-5 inline-block animate-in animate-bounce-slow relative">
-              <div className="relative mt-8 w-28 h-28 sm:w-32 sm:h-32 rounded-full border-2 border-slate-300 dark:border-cyber-border shadow-xl overflow-hidden">
-                <Image
-                  src={assets.profile_img}
-                  alt="Profile"
-                  className="w-full h-full object-cover rounded-full"
-                  width={128}
-                  height={128}
-                />
-              </div>
-            </div>
+      <div className="container mx-auto max-w-5xl py-16 sm:py-20 relative z-10">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyber-cyan/20 bg-white/70 px-4 py-1.5 text-xs font-medium text-cyber-cyan backdrop-blur dark:bg-cyber-surface/80">
+            <span className="inline-block h-2 w-2 rounded-full bg-cyber-emerald shadow-[0_0_12px_rgba(16,185,129,0.8)]" />
+            Available for secure web and software roles
+          </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold mt-4 mb-3 animate-in text-center">
-              <GradientText
-                colors={
-                  isDarkMode
-                    ? ['#06b6d4', '#10b981', '#06b6d4', '#0891b2', '#06b6d4']
-                    : ['#0f172a', '#06b6d4', '#0f172a', '#10b981', '#0f172a']
-                }
-                animationSpeed={3}
-                showBorder={false}
-                className="custom-class"
-              >
-                Saad Naanaiy
-              </GradientText>
-            </h1>
-
-            <div
-              className={`text-sm md:text-base mb-4 animate-in ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              <span className="font-mono text-cyber-cyan text-xs sm:text-sm">
-                {'> '}
-              </span>
-              <TypewriterComponent
-                options={{
-                  strings: roles,
-                  autoStart: true,
-                  loop: true,
-                }}
+          <div className="mb-6 relative">
+            <div className="absolute inset-0 rounded-full bg-cyber-cyan/20 blur-2xl" />
+            <div className="relative mt-4 w-28 h-28 sm:w-32 sm:h-32 rounded-full border-2 border-slate-300 dark:border-cyber-border shadow-xl overflow-hidden bg-slate-100 dark:bg-cyber-surface">
+              <Image
+                src={assets.profile_img}
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+                width={128}
+                height={128}
               />
             </div>
+          </div>
 
-            <p
-              className={`text-xs sm:text-sm max-w-xl mx-auto mb-6 animate-in leading-relaxed ${
-                isDarkMode ? 'text-slate-400' : 'text-slate-600'
-              }`}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-800 dark:text-white">
+            Saad Naanaiy
+          </h1>
+
+          <p className="mt-4 text-sm sm:text-base font-mono text-cyber-cyan min-h-7">
+            <span className="mr-2">&gt;</span>
+            <span
+              key={roles[roleIndex]}
+              className="inline-block animate-fade-in-fast"
             >
-              Higher School of Technology · 3rd year Cybersecurity & Systems
-              Administration Engineering · Focused on web/app security, secure
-              coding, automation, and AI-driven tooling.
-            </p>
+              {roles[roleIndex]}
+            </span>
+          </p>
 
-            <div className="flex justify-center gap-2 mb-6 animate-in">
-              <Link
-                href="https://github.com/Saadnaanaiy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-all"
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/saad-naanaiy-151a55278/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-all"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </Link>
-              <Link
-                href="https://www.credly.com/users/saad-naanaiy/badges"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-emerald hover:text-cyber-emerald hover:shadow-cyber-glow-emerald transition-all"
-                aria-label="Credly"
-              >
-                <Shield className="w-4 h-4" />
-              </Link>
-              <Link
-                href="mailto:saadnaanaiy@gmail.com"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-all"
-                aria-label="Email"
-              >
-                <Mail className="w-4 h-4" />
-              </Link>
+          <p
+            className={`mt-5 text-sm sm:text-base max-w-2xl leading-relaxed ${
+              isDarkMode ? "text-slate-400" : "text-slate-600"
+            }`}
+          >
+            Higher School of Technology · 3rd year Cybersecurity and Systems
+            Administration Engineering student focused on secure development,
+            web and app security, automation, and practical AI tooling.
+          </p>
+
+          <div className="mt-8 flex justify-center gap-2 flex-wrap">
+            <Link
+              href="https://github.com/Saadnaanaiy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-colors duration-150"
+              aria-label="GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/saad-naanaiy-151a55278/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-colors duration-150"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </Link>
+            <Link
+              href="https://www.credly.com/users/saad-naanaiy/badges"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-emerald hover:text-cyber-emerald hover:shadow-cyber-glow-emerald transition-colors duration-150"
+              aria-label="Credly"
+            >
+              <Shield className="w-4 h-4" />
+            </Link>
+            <Link
+              href="mailto:saadnaanaiy@gmail.com"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-300 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface hover:border-cyber-cyan hover:text-cyber-cyan hover:shadow-cyber-glow transition-colors duration-150"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+            <Link
+              href="#contact"
+              className="px-5 py-3 text-sm bg-cyber-cyan hover:bg-cyber-cyanDim text-cyber-dark font-semibold rounded-xl transition-colors duration-150 shadow-cyber-glow hover:shadow-cyber-glow flex items-center justify-center"
+            >
+              Contact Me
+            </Link>
+            <a
+              href="/saadNaanaiyCV.pdf"
+              download="SaadNaanaiy.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download CV"
+              className="px-5 py-3 text-sm border border-cyber-cyan dark:border-cyber-cyan text-cyber-cyan dark:text-cyber-cyan font-semibold rounded-xl hover:bg-cyber-cyan/10 transition-colors duration-150 flex items-center justify-center gap-1.5"
+            >
+              <Download className="w-4 h-4" />
+              Download CV
+            </a>
+          </div>
+
+          <div className="mt-10 grid w-full max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200/70 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface/80 px-5 py-4 backdrop-blur">
+              <p className="text-xs font-mono text-cyber-cyan mb-1">focus</p>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                Secure full stack development
+              </p>
             </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-3 mb-10 animate-in">
-              <Link
-                href="#contact"
-                className="px-4 py-2.5 text-sm bg-cyber-cyan hover:bg-cyber-cyanDim text-cyber-dark font-semibold rounded-lg transition-all shadow-cyber-glow hover:shadow-cyber-glow flex items-center justify-center"
-              >
-                Contact Me
-              </Link>
-              <a
-                href="/saadNaanaiyCV.pdf"
-                download="SaadNaanaiy.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Download CV"
-                className="px-4 py-2.5 text-sm border border-cyber-cyan dark:border-cyber-cyan text-cyber-cyan dark:text-cyber-cyan font-semibold rounded-lg hover:bg-cyber-cyan/10 transition-all flex items-center justify-center gap-1.5"
-              >
-                <Download className="w-4 h-4" />
-                Download CV
-              </a>
+            <div className="rounded-2xl border border-slate-200/70 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface/80 px-5 py-4 backdrop-blur">
+              <p className="text-xs font-mono text-cyber-emerald mb-1">stack</p>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                React, Next.js, backend and cloud tooling
+              </p>
+            </div>
+            <div className="rounded-2xl border border-slate-200/70 dark:border-cyber-border bg-white/80 dark:bg-cyber-surface/80 px-5 py-4 backdrop-blur">
+              <p className="text-xs font-mono text-cyber-amber mb-1">goal</p>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                Fast, resilient, production-grade interfaces
+              </p>
             </div>
           </div>
         </div>

@@ -1,10 +1,9 @@
 'use client';
-import { useState } from 'react';
-import { assets, toolsData, infoList } from '../assets/assets';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Code2, Cpu, Server, Shield } from 'lucide-react';
 import Image from 'next/image';
-import GradientText from './GradientText';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Shield, Server, Cpu } from 'lucide-react';
+import { useState } from 'react';
+import { assets, infoList, toolsData } from '../assets/assets';
 
 const About = ({ isDarkMode }) => {
   const [activeCategory, setActiveCategory] = useState('Languages');
@@ -17,8 +16,11 @@ const About = ({ isDarkMode }) => {
     'Packages',
     'Cloud Services',
     'Automation Tools',
+    'Bash scripting',
+    'Terminal-Based Editors',
     'Operating Systems',
     'Soft Skills',
+    'Python Data & Scientific Computing Stack'
   ];
 
   const filteredTools = toolsData.filter(
@@ -61,19 +63,8 @@ const About = ({ isDarkMode }) => {
         <p className="text-center mb-2 font-mono text-sm text-cyber-cyan">
           &gt; introduction
         </p>
-        <h2 className="text-center text-4xl sm:text-5xl font-bold mb-4">
-          <GradientText
-            colors={
-              isDarkMode
-                ? ['#06b6d4', '#10b981', '#06b6d4', '#0891b2']
-                : ['#0f172a', '#06b6d4', '#0f172a', '#10b981']
-            }
-            animationSpeed={3}
-            showBorder={false}
-            className="custom-class"
-          >
-            About Me
-          </GradientText>
+        <h2 className="text-center text-4xl sm:text-5xl font-bold mb-4 text-slate-800 dark:text-white">
+          About Me
         </h2>
         <p className="text-center text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-12">
           Cybersecurity Student · Web & Application Security · Systems Administration · AI

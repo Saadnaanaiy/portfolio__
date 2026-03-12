@@ -1,36 +1,62 @@
-import { assets } from '../assets/assets';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
-import { Shield, Menu, X, Moon, Sun, ArrowRight } from 'lucide-react';
+import { ArrowRight, Menu, Moon, Shield, Sun, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
-  { name: 'Home', href: '#top' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Work', href: '#work' },
-  { name: 'Certifications', href: '#certifs' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Home", href: "#top" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Work", href: "#work" },
+  { name: "Certifications", href: "#certifs" },
+  { name: "Contact", href: "#contact" },
 ];
 
-const Navbar = ({ isDarkMode, setIsDarkMode }) => {
+const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [isScroll, setIsScroll] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const sideMenuRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setIsScroll(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    let ticking = false;
+
+    const updateScrollState = () => {
+      setIsScroll(window.scrollY > 24);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (ticking) {
+        return;
+      }
+
+      ticking = true;
+      window.requestAnimationFrame(updateScrollState);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
   return (
     <>
       <nav
-        className={`w-full fixed px-4 sm:px-6 lg:px-8 xl:px-[8%] py-3 flex items-center justify-between z-50 transition-all duration-300 ${
+        className={`w-full fixed px-4 sm:px-6 lg:px-8 xl:px-[8%] py-3 flex items-center justify-between z-50 transition-all duration-200 ${
           isScroll
-            ? 'bg-slate-50/90 dark:bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-cyber-border/50 shadow-lg shadow-black/5'
-            : 'bg-transparent'
+            ? "bg-slate-50/90 dark:bg-cyber-dark/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-cyber-border/50 shadow-lg shadow-black/5"
+            : "bg-transparent"
         }`}
       >
         <a
@@ -52,7 +78,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyber-cyan dark:hover:text-cyber-cyan hover:bg-cyber-cyan/10 dark:hover:bg-cyber-cyan/10 transition-all"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyber-cyan dark:hover:text-cyber-cyan hover:bg-cyber-cyan/10 dark:hover:bg-cyber-cyan/10 transition-colors duration-150"
               >
                 {link.name}
               </a>
@@ -63,7 +89,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
               href="https://www.credly.com/users/saad-naanaiy/badges#credly"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-cyber-emerald dark:text-cyber-emerald hover:bg-cyber-emerald/10 transition-all"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-cyber-emerald dark:text-cyber-emerald hover:bg-cyber-emerald/10 transition-colors duration-150"
               title="Credly badges"
             >
               <Shield className="w-4 h-4" />
@@ -74,9 +100,10 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setIsDarkMode((prev) => !prev)}
-            className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-cyber-surface transition-all"
+            onClick={toggleTheme}
+            className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-cyber-surface transition-colors duration-150"
             aria-label="Toggle theme"
+            type="button"
           >
             {isDarkMode ? (
               <Sun className="w-5 h-5" />
@@ -86,7 +113,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
           </button>
           <a
             href="#contact"
-            className="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-lg bg-cyber-cyan dark:bg-cyber-cyan text-cyber-dark font-semibold text-sm hover:bg-cyber-cyanDim dark:hover:bg-cyber-cyanDim transition-all shadow-cyber-glow"
+            className="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-lg bg-cyber-cyan dark:bg-cyber-cyan text-cyber-dark font-semibold text-sm hover:bg-cyber-cyanDim dark:hover:bg-cyber-cyanDim transition-colors duration-150 shadow-cyber-glow"
           >
             Contact
             <ArrowRight className="w-4 h-4" />
@@ -95,6 +122,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
             onClick={() => setMobileOpen(true)}
             className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-cyber-surface"
             aria-label="Open menu"
+            type="button"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -104,8 +132,10 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
       {/* Mobile menu */}
       <div
         ref={sideMenuRef}
-        className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 z-50 md:hidden transition-opacity duration-200 ${
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div
@@ -114,8 +144,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
           aria-hidden="true"
         />
         <div
-          className={`absolute top-0 right-0 w-full max-w-xs h-full bg-slate-50 dark:bg-cyber-surface border-l border-slate-200 dark:border-cyber-border shadow-2xl transition-transform duration-300 ${
-            mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`absolute top-0 right-0 w-full max-w-xs h-full bg-slate-50 dark:bg-cyber-surface border-l border-slate-200 dark:border-cyber-border shadow-2xl transition-transform duration-200 ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-cyber-border">
@@ -124,6 +154,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
               onClick={() => setMobileOpen(false)}
               className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-cyber-dark"
               aria-label="Close menu"
+              type="button"
             >
               <X className="w-5 h-5" />
             </button>

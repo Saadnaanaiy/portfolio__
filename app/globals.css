@@ -2,12 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+  --theme-switch-duration: 160ms;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 html {
   filter: saturate(1.1);
 }
 
+html.theme-animate *,
+html.theme-animate *::before,
+html.theme-animate *::after {
+  transition:
+    background-color var(--theme-switch-duration) ease-out,
+    border-color var(--theme-switch-duration) ease-out,
+    color var(--theme-switch-duration) ease-out,
+    fill var(--theme-switch-duration) ease-out,
+    stroke var(--theme-switch-duration) ease-out,
+    box-shadow var(--theme-switch-duration) ease-out;
+}
+
 * {
-  font-family: var(--font-cyber), 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--font-cyber), "JetBrains Mono", ui-monospace, monospace;
+}
+
+.cyber-binary-char {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-fade-in-fast {
+  animation: fadeInFast 180ms ease-out;
+}
+
+@keyframes fadeInFast {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes wave {
@@ -28,6 +69,25 @@ html {
   .animate-wave {
     animation: wave 1s infinite ease-in-out;
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cyber-glow-text {
+    text-shadow:
+      0 0 10px rgba(6, 182, 212, 0.5),
+      0 0 20px rgba(6, 182, 212, 0.3);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10;
+  }
 }
 /* Style the scrollbar itself */
 ::-webkit-scrollbar {
@@ -47,7 +107,9 @@ html {
   background-color: #888; /* Slightly darker gray for a balanced thumb color */
   border-radius: 5px; /* Rounded thumb corners for a smoother appearance */
   border: 2px solid #e0e0e0; /* Thin border to separate the thumb from track */
-  transition: background-color 0.3s ease, border 0.3s ease; /* Smooth transition effect */
+  transition:
+    background-color 0.3s ease,
+    border 0.3s ease; /* Smooth transition effect */
 }
 
 /* Style the scrollbar handle on hover */
@@ -308,7 +370,7 @@ html {
 }
 
 .gradient-overlay::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -430,7 +492,9 @@ canvas {
 
 /* Optimize hero section transitions */
 .hero-section-transition {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 /* Optimize lazy loading transitions */
@@ -527,18 +591,23 @@ canvas {
 /* Cyber section background */
 .bg-cyber-section {
   background-color: #0a0e17;
-  background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 /* Border glow on focus/hover */
 .cyber-border-glow {
-  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 0 20px rgba(6, 182, 212, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(6, 182, 212, 0.2),
+    0 0 20px rgba(6, 182, 212, 0.1);
 }
 
 .cyber-border-glow:hover {
-  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.4), 0 0 24px rgba(6, 182, 212, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(6, 182, 212, 0.4),
+    0 0 24px rgba(6, 182, 212, 0.2);
 }
 
 /* Binary rain – 0 & 1 falling from top to bottom */
@@ -600,7 +669,9 @@ canvas {
 
 /* Hover effect for cards */
 .hover-card {
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .hover-card:hover {
@@ -630,7 +701,9 @@ canvas {
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 500ms, transform 500ms;
+  transition:
+    opacity 500ms,
+    transform 500ms;
 }
 
 .page-transition-exit {
@@ -641,13 +714,56 @@ canvas {
 .page-transition-exit-active {
   opacity: 0;
   transform: translateY(-20px);
-  transition: opacity 500ms, transform 500ms;
+  transition:
+    opacity 500ms,
+    transform 500ms;
 }
 
-/* Smooth dark/light theme toggle (only during switch) */
-.theme-transition,
-.theme-transition * {
-  transition-property: background-color, color, border-color, fill, stroke, box-shadow;
-  transition-duration: 450ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Smooth + performant theme switching (uses browser snapshots) */
+@supports (view-transition-name: root) {
+  html {
+    view-transition-name: root;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    animation-name: cyber-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: cyber-fade-in;
+  }
+}
+
+@keyframes cyber-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cyber-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @supports (view-transition-name: root) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 1ms;
+    }
+  }
 }
